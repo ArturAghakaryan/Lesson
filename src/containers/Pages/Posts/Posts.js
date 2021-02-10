@@ -12,7 +12,7 @@ export class Posts extends Component {
   };
 
   componentDidMount() {
-    service.getPosts(0,6).then((data) => {
+    service.getPosts(0, 9).then((data) => {
       this.setState({
         posts: data,
       });
@@ -48,14 +48,12 @@ export class Posts extends Component {
     });
   };
 
-  deletePost = () => {
-    service.deletePost(1).then((data) => {
-      const newPost = this.state.posts
-
-     newPost.splice(1, 1)
-
+  deletePost = (id) => {
+    service.deletePost(id).then(() => {
       this.setState({
-        posts: newPost,
+        posts: this.state.posts.filter((el) => {
+          return el.id !== id;
+        }),
       });
     });
   };
@@ -71,7 +69,7 @@ export class Posts extends Component {
             <Button className="btn-post" onClick={this.updatePost}>
               Update post
             </Button>
-            <Button className="btn-post" onClick={this.deletePost}>
+            <Button className="btn-post" onClick={() => this.deletePost(2)}>
               Delete post
             </Button>
           </div>
