@@ -1,4 +1,5 @@
 import React from "react";
+
 import BoxPost from "./BoxPost/BoxPost";
 import BoxStandart from "./BoxStandart/BoxStandart";
 

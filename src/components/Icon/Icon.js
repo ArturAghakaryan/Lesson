@@ -1,42 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
-// let path = [];
+ import Img from "../../assets/Icons/default/menu.svg"
 
-// const setPath = (value) => {};
 
-// const getPath = (path) => {};
+const Icon = async ({ name = "aaa", pack = "default" }) => {
+   let path = "../../assets/Icons/default/menu.svg";
+  // const { icon } = await import(path);
+  let {icon} = await import("../../assets/Icons/default/menu.svg");
 
-// getPath(path);
-
-//  import IconValu from path;
-
-const Icon = ({ name = "aaa", pack = "default" }) => {
-  const path = '';
-
-  console.log(path);
+  console.log(icon);
   return (
     <span className={`icon icon-${name}`}>
       {/* // <img src={path}> </img> */}
-      <img src={'./assests/Icons/' + pack + '/menu.svg' } />
+      {/* <img src={'./assests/Icons/' + pack + '/menu.svg' } /> */}
     </span>
   );
 };
 
 export default Icon;
-
-// import React, { Component } from "react";
-
-// console.log(this.name);
-
-// export default class Icon extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       name: "menu",
-//       pack: "default",
-//     };
-//   }
-//   render() {
-//     return <div></div>;
-//   }
-// }

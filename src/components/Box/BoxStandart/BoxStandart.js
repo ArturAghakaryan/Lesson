@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types";
 
 const BoxStandart = ({data , className}) => {
     return (
@@ -8,4 +9,11 @@ const BoxStandart = ({data , className}) => {
         </div>
     )
 }
+
+BoxStandart.propTypes = {
+    className: PropTypes.string,
+    title: PropTypes.string,
+    body: PropTypes.string,
+}
+
 export default BoxStandart

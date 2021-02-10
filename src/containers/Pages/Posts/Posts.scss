@@ -1,9 +1,17 @@
 .posts-inner {
-    margin: 20px 0;
+  margin: 20px 0;
+  .posts-settings-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 0 20px;
+    margin-bottom: 20px;
+  }
+
   .posts-items {
     display: flex;
     margin: -20px 0 0 -20px;
     flex-wrap: wrap;
+    overflow: hidden;
 
     .posts-item {
       padding: 20px 0 0 20px;
