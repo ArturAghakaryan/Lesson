@@ -23,7 +23,6 @@ class Service {
         return resolve(this._request("GET", `/posts/?_start=${start}&_limit=${limit}`));
       },2000);
     })
-    
   };
 
   getAllPosts = () => {
@@ -45,6 +44,22 @@ class Service {
   deletePost = (id) => {
     return this._request("DELETE", `/posts/${id}`);
   };
+
+  /**
+   * Start Todos config
+   */
+
+  getTodos = (start, limit) => {
+    return new Promise((resolve, reject) =>{
+      setTimeout(()=>{
+        return resolve(this._request("GET", `/todos/?_start=${start}&_limit=${limit}`));
+      },2000);
+    })
+  };
+
+
+
+
 }
 
 const service = new Service();

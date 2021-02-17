@@ -1,7 +1,18 @@
-.hedaer-main{
-    font-size: 48px;
-    line-height: 56px;
-    text-align: center;
+.hedaer-main {
+  width: 100%;
+  z-index: 1000;
+  background: #111418;
+
+  &.is-sticky {
+    position: fixed;
+    top: 0;
+    background: transparent;
+  }
+
+  .header-main-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px 0;
-    background: #efefef;
+  }
 }
