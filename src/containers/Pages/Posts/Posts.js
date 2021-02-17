@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 
+import Button from "components/Button/Button";
 import Box from "components/Box/Box";
 import service from "api/service";
 
 import "./Posts.scss";
-import Button from "components/Button/Button";
+
+const limit = 9;
 
 export class Posts extends Component {
   state = {
-    posts: [],
+    posts: null,
+    start: 0,
+    hesMore: true,
+    loading: false,
   };
 
   componentDidMount() {
-    service.getPosts(0, 9).then((data) => {
+    service.getPosts(this.state.start, limit).then((data) => {
       this.setState({
         posts: data,
       });
@@ -58,7 +63,44 @@ export class Posts extends Component {
     });
   };
 
+  getMore = () => {
+    const newstart = this.state.start + limit;
+
+    this.setState({
+      start: newstart,
+      loading: true,
+    });
+
+    service.getPosts(newstart, limit).then((data) => {
+      this.setState({
+        posts: [...this.state.posts, ...data],
+        hesMore: data.length < limit ? false : true,
+        loading: false,
+      });
+    });
+  };
+
   render() {
+    const { loading, hesMore, posts } = this.state;
+
+    if (!posts) {
+      return (
+        <div className="app-loader-container container">
+          <div className="app-loader"></div>
+        </div>
+      );
+    }
+
+    if (posts.length === 0 ) {
+      return (
+        <div className="container">
+          <div className="posts-inner">
+            <p className="posts-no-result">No results</p>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="container">
         <div className="posts-inner">
@@ -74,13 +116,25 @@ export class Posts extends Component {
             </Button>
           </div>
           <div className="posts-items">
-            {this.state.posts.map((el) => {
+            {posts.map((el) => {
               return (
                 <div key={el.id} className="posts-item">
                   <Box box={"post"} data={el} />
                 </div>
               );
             })}
+          </div>
+          <div className="posts-load-more">
+            {loading && (
+              <div className="app-loader-container">
+                <div className="app-loader"></div>
+              </div>
+            )}
+            {hesMore && !loading && (
+              <Button className="btn-load-more" onClick={this.getMore}>
+                Get More
+              </Button>
+            )}
           </div>
         </div>
       </div>
