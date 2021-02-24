@@ -10,13 +10,21 @@ export class Modal extends Component {
     super(props);
     this.state = {
       isModalOpen: false,
-      children: props.children,
       modalTitle: props.modalTitle ? props.modalTitle : null,
       className: props.className ? props.className : "",
       modalFunction: props.modalFunction ? props.modalFunction : null,
-      functionButtonTitle: props.functionButtonTitle ? props.functionButtonTitle : null,
-      functionButtonTitle: props.functionButtonTitle ? props.functionButtonTitle : null,
-      showTopCloseButonn: props.showTopCloseButonn ? props.showTopCloseButonn : true,
+      functionButtonTitle: props.functionButtonTitle
+        ? props.functionButtonTitle
+        : null,
+      functionButtonTitle: props.functionButtonTitle
+        ? props.functionButtonTitle
+        : null,
+      showTopCloseButton: props.showTopCloseButton !== false ? true : null,
+      showBottomCloseButonn:
+        props.showBottomCloseButonn !== false ? true : null,
+      showBottomCloseButonnTitle: props.showBottomCloseButonnTitle
+        ? props.showBottomCloseButonnTitle
+        : null,
     };
   }
 
@@ -36,12 +44,13 @@ export class Modal extends Component {
   render() {
     const {
       isModalOpen,
-      children,
       modalTitle,
       className,
       modalFunction,
       functionButtonTitle,
-      showTopCloseButonn
+      showTopCloseButton,
+      showBottomCloseButonn,
+      showBottomCloseButonnTitle,
     } = this.state;
     return (
       <MaterialModal
@@ -53,16 +62,19 @@ export class Modal extends Component {
           <div className="modal__header">
             {modalTitle ? <span>{modalTitle}</span> : ""}
 
-            {showTopCloseButonn &&  <Button className="modal__close-btn" onClick={this.closeModal}>
-              <HighlightOffIcon />
-            </Button>}
-           
+            {showTopCloseButton && (
+              <Button className="modal__close-btn" onClick={this.closeModal}>
+                <HighlightOffIcon />
+              </Button>
+            )}
           </div>
-          <div className="modal__body">{children}</div>
+          <div className="modal__body">{this.props.children}</div>
           <div className="modal__footer">
-            <Button className="is-secondary" onClick={this.closeModal}>
-              Close
-            </Button>
+            {showBottomCloseButonn && (
+              <Button className="is-secondary" onClick={this.closeModal}>
+                {showBottomCloseButonnTitle}
+              </Button>
+            )}
             {modalFunction && (
               <Button className="is-primary" onClick={modalFunction}>
                 {functionButtonTitle}

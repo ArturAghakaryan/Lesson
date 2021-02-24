@@ -16,16 +16,68 @@
     .posts-item {
       padding: 20px 0 0 20px;
       width: 33.33%;
+      position: relative;
+
+      &__remove-btn {
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        padding: 5px 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 
-  .posts-load-more{
+  .posts-load-more {
     margin-top: 20px;
     display: flex;
     justify-content: center;
   }
 
-  .posts-no-result{
+  .posts-no-result {
     text-align: center;
+  }
+}
+
+.switcher {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -200px;
+  display: flex;
+  flex-direction: row;
+  transition: all 0.3s linear;
+  background: #fff;
+  box-shadow: 0px 0px 3px rgb(0 0 0 / 30%);
+  max-width: 200px;
+
+  &.is-open {
+    right: 0;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-left: -48px;
+  }
+
+  &__contnet {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    .fild--grup {
+      margin: 0 5px 0 0;
+      input {
+        cursor: pointer;
+      }
+    }
+
+    label {
+      cursor: pointer;
+    }
   }
 }

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 
-import service from "api/service";
 import Button from "components/Button/Button";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 
 import "./PostDetails.scss";
 import Modal from "components/Modal/Modal";
@@ -36,17 +34,25 @@ export class PostDetails extends Component {
   };
 
   savePost = () => {
-    fbService.updatePost(this.state.data.i, {
-      ...this.state.data,
-      title: this.state.titleValue,
-      body: this.state.descValue,
-    });
+    fbService
+      .updatePost({
+        ...this.state.data,
+        title: this.state.titleValue,
+        body: this.state.descValue,
+      })
+      .then((res) => {
+        this.setState({
+          data: {
+            ...this.state.data,
+            title: this.state.titleValue,
+            body: this.state.descValue,
+          },
+        });
+      });
     this.modal.current.closeModal();
   };
 
- changeValue = (name,value) => {
-   console.log(value);
-   console.log(name);
+  changeValue = (name, value) => {
     this.setState({
       [name]: value,
     });
@@ -73,10 +79,6 @@ export class PostDetails extends Component {
             <EditIcon />
             <span>Edit post</span>
           </Button>
-          {/* <Button className="is-primary is-icon-right"> 
-            <DeleteIcon/>
-            <span>Delete post</span>
-          </Button> */}
         </div>
 
         <Modal
@@ -85,8 +87,6 @@ export class PostDetails extends Component {
           className="edit-modal"
           modalFunction={this.savePost}
           functionButtonTitle="Save"
-          showTopCloseButonn={false}
-          showBottomCloseButonn={true}
           showBottomCloseButonnTitle="Close"
         >
           <Field
@@ -95,8 +95,8 @@ export class PostDetails extends Component {
             label="Post title"
             id="postTitle"
             value={titleValue}
-            onChange={(e) =>  this.setState({titleValue: e.target.value})}
-          /> 
+            onChange={(e) => this.changeValue("titleValue", e.target.value)}
+          />
           <Field
             type="textarea"
             placeholder="Entry your new post description..."
