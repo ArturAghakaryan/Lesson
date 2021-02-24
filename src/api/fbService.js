@@ -32,7 +32,7 @@ class FbService {
     return res.val();
   };
 
-  createPost = async (postData) => {
+  createPost = async (startAt = 0, endAt = 8 , postData) => {
     const res = await firebase
       .database()
       .ref("posts")
@@ -51,6 +51,7 @@ class FbService {
       .ref(`posts/${id + 1}`)
       .set(newItem);
 
+    const data = await this.getPosts(startAt, endAt);
     return newItem;
   };
 

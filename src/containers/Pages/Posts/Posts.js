@@ -8,6 +8,7 @@ import Modal from "components/Modal/Modal";
 import Field from "components/Field/Field";
 import fbService from "api/fbService";
 
+
 import "./Posts.scss";
 
 const endAt = 8;
@@ -30,6 +31,8 @@ export class Posts extends Component {
     this.modal = React.createRef();
     this.removeModal = React.createRef();
   }
+
+  
 
   componentDidMount() {
     fbService.getPosts(this.state.startAt, endAt).then((data) => {
@@ -59,15 +62,13 @@ export class Posts extends Component {
 
   createPost = () => {
     fbService
-      .createPost({
+      .createPost(0, this.state.totalItem, {
         title: this.state.titleValue,
         body: this.state.descValue,
         userId: 1,
       })
       .then((data) => {
-        this.setState({
-          posts: [...this.state.posts, data],
-        });
+        this.props.history.push(`posts/${data.id}`);
       });
     this.modal.current.closeModal();
   };
