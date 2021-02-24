@@ -1,10 +1,10 @@
 class Service {
   constructor() {
-    this.baseUrl = "https://jsonplaceholder.typicode.com";
+    this.baseUrl = "https://react-learn-fe260-default-rtdb.firebaseio.com";
   }
 
   _request = (method, url, data = null) => {
-    return fetch(`${this.baseUrl}${url}`, {
+    return fetch(`${this.baseUrl}${url}.json`, {
       method,
       headers: data ? { "Content-Type": "application/json" } : {},
       body: data ? JSON.stringify(data) : null,
@@ -20,7 +20,7 @@ class Service {
   getPosts = (start, limit) => {
     return new Promise((resolve, reject) =>{
       setTimeout(()=>{
-        return resolve(this._request("GET", `/posts/?_start=${start}&_limit=${limit}`));
+        return resolve(this._request("GET", `/posts?_start=${start}&_limit=${limit}`));
       },2000);
     })
   };
@@ -52,7 +52,7 @@ class Service {
   getTodos = (start, limit) => {
     return new Promise((resolve, reject) =>{
       setTimeout(()=>{
-        return resolve(this._request("GET", `/todos/?_start=${start}&_limit=${limit}`));
+        return resolve(this._request("GET", `/todos?_start=${start}&_limit=${limit}`));
       },2000);
     })
   };

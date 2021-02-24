@@ -10,7 +10,7 @@ const Welcome = () => {
               <div className="welcome-info">
                 <div className="welcome-info-content">
                   <h2>Welcome !</h2>
-                  <p>my first React project</p>
+                  <p>my first <strong>React Js</strong> project</p>
                 </div>
               </div>
         </section>

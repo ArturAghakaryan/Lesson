@@ -18,4 +18,13 @@
     line-height: 22px;
     color: $text-color;
   }
+
+  &__buttons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    .btn{
+      margin-left: 5px;
+    }
+  }
 }
